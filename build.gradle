@@ -39,6 +39,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation group: 'com.mysql', name: 'mysql-connector-j', version: '8.0.31'
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.14.2'
+    testImplementation 'com.h2database:h2:2.2.220'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
