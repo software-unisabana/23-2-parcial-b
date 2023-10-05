@@ -26,9 +26,9 @@ jacocoTestReport {
     afterEvaluate {
         classDirectories.setFrom(files(classDirectories.files.collect {
             fileTree(dir: it, exclude: [
-                    "**/dto/**",
-                    "**/entity/*",
-                    "**/model/*"
+                    "co/edu/unisabana/parcialarquitectura/controller/dto",
+                    "co/edu/unisabana/parcialarquitectura/repository/entity",
+                    "co/edu/unisabana/parcialarquitectura/service/model"
             ])
         }))
     }

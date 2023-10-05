@@ -1,0 +1,39 @@
+name: Continous Integration
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Instalando Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '20'
+      - name: Make Gradle script executable
+        run: chmod +x ./gradlew
+      - name: Compilar proyecto
+        uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
+        with:
+          arguments: build
+        # generates coverage-report.md and publishes as checkrun jacoco
+      - name: Ejecutar Test
+        run: ./gradlew test
+
+      - name: Ejecutar Test de cobertura
+        run: ./gradlew jacocoTestReport
+
+      - name: Crear un distintivo JaCoCo
+        uses: cicirello/jacoco-badge-generator@v2
+        with:
+          generate-branches-badge: true
+          jacoco-csv-file: build/reports/jacoco/test/jacocoTestReport.csv
