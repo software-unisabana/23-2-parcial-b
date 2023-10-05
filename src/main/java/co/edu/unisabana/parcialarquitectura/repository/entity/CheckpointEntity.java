@@ -1,6 +1,7 @@
 package co.edu.unisabana.parcialarquitectura.repository.entity;
 
 import co.edu.unisabana.parcialarquitectura.service.model.Checkin;
+import co.edu.unisabana.parcialarquitectura.service.model.Checkout;
 import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -40,7 +41,7 @@ public class CheckpointEntity {
     return checkin;
   }
 
-  public static CheckpointEntity fromCheckin(Checkin checkin) {
+  public static CheckpointEntity fromCheckin(Checkout checkin) {
     CheckpointEntity checkpoint = new CheckpointEntity();
     checkpoint.setCreationDate(LocalDateTime.now());
     checkpoint.setDriver(checkin.getDriver());
@@ -51,5 +52,13 @@ public class CheckpointEntity {
     return checkpoint;
   }
 
+  public static CheckpointEntity fromCheckout(Checkout checkout) {
+    CheckpointEntity checkpoint = new CheckpointEntity();
+    checkpoint.setDriver(checkout.getDriver());
+    checkpoint.setFacility(checkout.getFacility());
+    checkpoint.setDayOfMonth(checkout.getDayOfMonth());
+    checkpoint.setType("CHECKOUT");
+    return checkpoint;
+  }
 
 }
